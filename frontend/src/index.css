@@ -6,3 +6,6 @@
 * {
   font-family: "Poppins", sans-serif;
 }
+body {
+  @apply bg-violet-600;
+}

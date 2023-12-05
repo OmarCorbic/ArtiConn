@@ -2,6 +2,7 @@ import { UseQueryHookResult } from "@reduxjs/toolkit/dist/query/react/buildHooks
 import Ad from "./Ad";
 import { useGetAllAdsQuery } from "./adsApiSlice";
 import { QueryDefinition } from "@reduxjs/toolkit/query";
+import AdPlaceholder from "./AdPlaceholder";
 
 const AdsList = () => {
   const {
@@ -17,7 +18,14 @@ const AdsList = () => {
   let content;
 
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = (
+      <div className="px-3 py-2 flex flex-col gap-2">
+        <AdPlaceholder />
+        <AdPlaceholder />
+        <AdPlaceholder />
+        <AdPlaceholder />
+      </div>
+    );
   }
 
   if (isError) {

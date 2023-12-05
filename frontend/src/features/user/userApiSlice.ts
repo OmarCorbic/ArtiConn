@@ -7,7 +7,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         url: `/user/${data.userId}`,
         method: "GET",
       }),
-      providesTags: ["User"],
+      providesTags: [{ type: "User", id: "INFO" }],
     }),
 
     getUserAds: builder.query({
@@ -15,7 +15,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         url: `/user/${data.userId}/ads`,
         method: "GET",
       }),
-      providesTags: ["User"],
+      providesTags: [{ type: "User", id: "ADS" }],
     }),
 
     getProfilePhoto: builder.query({
@@ -23,7 +23,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         url: `/user/${data.userId}/profile-photo`,
         method: "GET",
       }),
-      providesTags: ["User"],
+      providesTags: [{ type: "User", id: "PHOTO" }],
     }),
 
     editUserInfo: builder.mutation({
@@ -32,7 +32,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data.body,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: [{ type: "User", id: "INFO" }],
     }),
 
     changePassword: builder.mutation({
@@ -49,7 +49,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data.body,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: [{ type: "User", id: "PHOTO" }],
     }),
   }),
 });

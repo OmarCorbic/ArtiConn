@@ -34,7 +34,7 @@ export const adsApiSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data.body,
       }),
-      invalidatesTags: ["Ads", "User"],
+      invalidatesTags: ["Ads", { type: "User", id: "ADS" }],
     }),
 
     deleteAd: builder.mutation({
@@ -42,7 +42,7 @@ export const adsApiSlice = apiSlice.injectEndpoints({
         url: `/ads/${data.adId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Ads", "User"],
+      invalidatesTags: ["Ads", { type: "User", id: "ADS" }],
     }),
   }),
 });

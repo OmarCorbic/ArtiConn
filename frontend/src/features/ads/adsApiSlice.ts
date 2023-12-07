@@ -28,6 +28,15 @@ export const adsApiSlice = apiSlice.injectEndpoints({
       providesTags: ["Ads"],
     }),
 
+    createAd: builder.mutation({
+      query: (data) => ({
+        url: `/ads`,
+        method: "POST",
+        body: data.body,
+      }),
+      invalidatesTags: ["Ads", { type: "User", id: "ADS" }],
+    }),
+
     editAd: builder.mutation({
       query: (data) => ({
         url: `/ads/${data.adId}`,
@@ -47,5 +56,9 @@ export const adsApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetAllAdsQuery, useDeleteAdMutation, useEditAdMutation } =
-  adsApiSlice;
+export const {
+  useGetAllAdsQuery,
+  useCreateAdMutation,
+  useDeleteAdMutation,
+  useEditAdMutation,
+} = adsApiSlice;

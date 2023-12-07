@@ -20,14 +20,14 @@ const UserProfileLayout = () => {
   };
 
   return (
-    <div className="px-3 py-2">
-      <button
+    <div className="px-2 py-2">
+      {/* <button
         disabled={isLoading}
         onClick={handleLogOut}
         className="bg-red-400"
       >
         Log out
-      </button>
+      </button> */}
 
       <UserInfo userId={params.id} />
       <UserAds userId={params.id} />

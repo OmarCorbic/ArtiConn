@@ -9,7 +9,7 @@ const ProtectedLayout = () => {
   const userId = useSelector(selectCurrentUserId)?.toString();
 
   return (
-    <div className="h-screen flex flex-col ">
+    <div className="h-screen overflow-auto flex flex-col bg-white">
       <Outlet />
       <div className="flex justify-around mt-auto w-full bg-white border-t py-1">
         <Link

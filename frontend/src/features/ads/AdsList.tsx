@@ -19,7 +19,7 @@ const AdsList = () => {
 
   if (isLoading) {
     content = (
-      <div className="px-3 py-2 flex flex-col gap-2">
+      <div className="px-1 py-2 flex flex-col gap-2">
         <AdPlaceholder />
         <AdPlaceholder />
         <AdPlaceholder />
@@ -34,7 +34,7 @@ const AdsList = () => {
 
   if (isSuccess) {
     content = (
-      <div className="px-3 py-2 flex flex-col gap-2">
+      <div className="px-1 py-2 flex flex-col gap-2">
         {ads.map((ad: any) => {
           return <Ad key={ad.adId} ad={ad} />;
         })}

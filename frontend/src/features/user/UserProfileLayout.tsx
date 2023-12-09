@@ -20,7 +20,7 @@ const UserProfileLayout = () => {
   };
 
   return (
-    <div className="px-2 py-2">
+    <div className="py-2">
       {/* <button
         disabled={isLoading}
         onClick={handleLogOut}
@@ -28,9 +28,12 @@ const UserProfileLayout = () => {
       >
         Log out
       </button> */}
-
-      <UserInfo userId={params.id} />
-      <UserAds userId={params.id} />
+      <div className="px-3">
+        <UserInfo userId={params.id} />
+      </div>
+      <div className="px-1">
+        <UserAds userId={params.id} />
+      </div>
     </div>
   );
 };

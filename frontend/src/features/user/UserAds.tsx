@@ -4,7 +4,7 @@ import { useGetUserAdsQuery } from "./userApiSlice";
 import { MdPlaylistRemove } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { selectCurrentUserId } from "../auth/authSlice";
-import CreateNewAd from "./CreateNewAd";
+import CreateNewAd from "../ads/CreateNewAd";
 type Props = { userId?: string };
 
 const UserAds = ({ userId }: Props) => {
@@ -55,7 +55,7 @@ const UserAds = ({ userId }: Props) => {
         {!showDemands ? (
           services?.length > 0 ? (
             <>
-              <div className="flex flex-col gap-2 px-1 overflow-auto">
+              <div className="flex flex-wrap gap-2 overflow-auto">
                 {services.map((ad: any) => {
                   return <Ad key={ad.adId} ad={ad} />;
                 })}
@@ -71,7 +71,7 @@ const UserAds = ({ userId }: Props) => {
           )
         ) : demands?.length > 0 ? (
           <>
-            <div className="flex flex-col gap-2 px-1 overflow-auto">
+            <div className="flex flex-wrap gap-2 overflow-auto">
               {demands.map((ad: any) => {
                 return <Ad key={ad.adId} ad={ad} />;
               })}

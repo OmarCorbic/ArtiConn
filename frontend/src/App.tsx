@@ -14,6 +14,7 @@ import AdsList from "./features/ads/AdsList";
 import ProtectedLayout from "./components/ProtectedLayout";
 import UserProfileLayout from "./features/user/UserProfileLayout";
 import PersistLogin from "./features/auth/PersistLogin";
+import EditProfile from "./features/user/EditProfile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,11 +26,17 @@ const router = createBrowserRouter(
         <Route path="/auth/register" element={<Register />} />
       </Route>
 
+      <Route path="/public-feed" element={<AdsList />} />
+
       <Route element={<PersistLogin />}>
         <Route element={<ProtectedRoutes />}>
-          <Route element={<ProtectedLayout />}>
-            <Route path="/feed" element={<AdsList />} />
-            <Route path="/profile/:id" element={<UserProfileLayout />} />
+          <Route path="/private" element={<ProtectedLayout />}>
+            <Route index element={<AdsList />} />
+            <Route
+              path="/private/profile/:id"
+              element={<UserProfileLayout />}
+            />
+            <Route path="/private/profile/:id/edit" element={<EditProfile />} />
           </Route>
         </Route>
       </Route>

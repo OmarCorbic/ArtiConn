@@ -12,7 +12,11 @@ export const minioClient = new Minio.Client({
 try {
   minioClient.bucketExists("user-profile-photos", (err, exists) => {
     if (err) {
-      console.error("Error checking bucket existence:", err);
+      console.error(
+        "MINIO CLIENT",
+        "Error checking bucket existence:",
+        err.message
+      );
     } else {
       console.log("Connection to Minio established.");
     }

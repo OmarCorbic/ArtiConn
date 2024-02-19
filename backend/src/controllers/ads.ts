@@ -5,15 +5,16 @@ import { StatusCodes } from "http-status-codes";
 import { AuthRequest } from "../types";
 
 export const getAllAds = async (req: AuthRequest, res: Response) => {
-  const result: any = await query("SELECT * FROM ads", []);
-
+  const result: any = await query(
+    "SELECT *, DATE_FORMAT(date, '%Y-%m-%d') AS formatted_date FROM ads",
+    []
+  );
   res.json(result);
 };
 
 export const addAd = async (req: AuthRequest, res: Response) => {
   const { payout, payoutType, city, type, title, description, date } = req.body;
   const userId = req.user?.userId;
-
   const q =
     "INSERT INTO ads (userId, payout, payoutType, city, type, title, description, date) VALUES (?,?,?,?,?,?,?,?)";
   await query(q, [
@@ -37,7 +38,7 @@ export const editAd = async (req: AuthRequest, res: Response) => {
   const fields = { payout, payoutType, city, title, description, date };
   const adId = Number(req.params.id);
   const userId = req.user?.userId;
-
+  console.log(date);
   // check if ad exists
   let result: any = await query("SELECT userId FROM ads WHERE adId=?", [adId]);
   if (result.length < 1) throw new NotFoundError("Advertisement not found");

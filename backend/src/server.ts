@@ -19,8 +19,8 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
-app.use("/api/user", authorizeUser, userRouter);
-app.use("/api/ads", authorizeUser, adsRouter);
+app.use("/api/user", userRouter);
+app.use("/api/ads", adsRouter);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;

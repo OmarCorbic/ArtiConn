@@ -9,6 +9,7 @@ import {
   uploadUserPhoto,
 } from "../controllers/user";
 const router = express.Router();
+import authorizeUser from "../middleware/authorization";
 
 // Configure multer storage
 // const storage = multer.memoryStorage();
@@ -23,13 +24,17 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.route("/change-password").patch(changeUserPassword);
+router.route("/:id/profile-photo").get(getUserPhoto);
+
+router.route("/change-password").patch(authorizeUser, changeUserPassword);
 router
   .route("/profile-photo")
-  .post(upload.single("profile-photo"), uploadUserPhoto);
+  .post(authorizeUser, upload.single("profile-photo"), uploadUserPhoto);
 
-router.route("/:id/profile-photo").get(getUserPhoto);
-router.route("/:id/ads").get(getUserAds);
-router.route("/:id").patch(editUserInfo).get(getUserInfo);
+router.route("/:id/ads").get(authorizeUser, getUserAds);
+router
+  .route("/:id")
+  .patch(authorizeUser, editUserInfo)
+  .get(authorizeUser, getUserInfo);
 
 export default router;

@@ -6,7 +6,8 @@ import { Response } from "express";
 import * as bcrypt from "bcrypt";
 import sUUID from "short-uuid";
 import query from "../db";
-import fs from "fs";
+import { BucketItemStat } from "minio";
+import { deleteFile } from "../utils/deleteFIle";
 
 export const getUserInfo = async (req: AuthRequest, res: Response) => {
   const userId = req.params.id || req.user?.userId;
@@ -31,17 +32,39 @@ export const uploadUserPhoto = async (req: AuthRequest, res: Response) => {
   const { mimetype, size, path } = req.file;
   const allowedImageTypes = ["image/jpeg", "image/png", "image/jpg"];
   if (!path || !size || !mimetype || !allowedImageTypes.includes(mimetype)) {
+    deleteFile(path);
     throw new BadRequestError("Invalid file");
   }
 
   if (size > 1000000) {
+    deleteFile(path);
     throw new BadRequestError("Size of the photo must be under 1mb");
   }
 
-  const photoId = sUUID.generate();
-  await minioClient.fPutObject("user-profile-photos", photoId, path);
+  const result: any = await query("SELECT photoId FROM users WHERE userId=?", [
+    userId,
+  ]);
 
+  if (result[0].photoId !== null) {
+    const itemName = result[0].photoId;
+    try {
+      const stat: BucketItemStat = await minioClient?.statObject(
+        "user-profile-photos",
+        itemName
+      );
+
+      if (stat) {
+        await minioClient?.removeObject("user-profile-photos", itemName);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const photoId = sUUID.generate();
+  await minioClient?.fPutObject("user-profile-photos", photoId, path);
   await query("UPDATE users SET photoId=? WHERE userId=?", [photoId, userId]);
+  deleteFile(path);
 
   res.status(StatusCodes.CREATED).json({
     message: "Profile picture updated successfully",
@@ -61,12 +84,16 @@ export const getUserPhoto = async (req: AuthRequest, res: Response) => {
   const { username, photoId } = result[0];
 
   let temporaryUrl = null;
-  if (photoId) {
-    temporaryUrl = await minioClient.presignedGetObject(
-      "user-profile-photos",
-      photoId,
-      24 * 60 * 60
-    );
+  if (photoId !== null) {
+    try {
+      temporaryUrl = await minioClient?.presignedGetObject(
+        "user-profile-photos",
+        photoId,
+        24 * 60 * 60
+      );
+    } catch (error: any) {
+      console.log(error.message || error.data.message);
+    }
   }
 
   return res.status(StatusCodes.OK).json({ username, url: temporaryUrl });
@@ -112,18 +139,33 @@ export const editUserInfo = async (req: AuthRequest, res: Response) => {
 };
 
 export const changeUserPassword = async (req: AuthRequest, res: Response) => {
-  const { newPassword } = req.body;
+  const { currentPass, newPass, repeatPass } = req.body;
   const userId = req.user?.userId;
 
-  const salt = await bcrypt.genSalt(10);
-  const newHashedPassword = await bcrypt.hash(newPassword, salt);
+  if (newPass !== repeatPass) {
+    throw new BadRequestError("New passwords do not match");
+  }
 
-  const result: any = await query(
-    "UPDATE users SET password=? WHERE userId=?",
-    [newHashedPassword, userId]
-  );
-
+  let result: any = await query("SELECT password FROM users WHERE userId=?", [
+    userId,
+  ]);
   if (result.affectedRows < 1) throw new NotFoundError("User not found");
+
+  const isPasswordCorrect = await bcrypt.compare(
+    currentPass,
+    result[0].password
+  );
+  if (!isPasswordCorrect) {
+    throw new BadRequestError("Incorrect current password");
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  const newHashedPass = await bcrypt.hash(newPass, salt);
+
+  result = await query("UPDATE users SET password=? WHERE userId=?", [
+    newHashedPass,
+    userId,
+  ]);
 
   res
     .status(StatusCodes.CREATED)

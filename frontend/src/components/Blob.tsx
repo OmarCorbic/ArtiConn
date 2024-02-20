@@ -10,11 +10,12 @@ const blobs = [blob1, blob2, blob3, blob4, blob5, blob6, blob7];
 
 type BlobProps = { imgSrc: string; size?: number };
 
-const Blob = ({ imgSrc, size = 200 }: BlobProps) => {
+const Blob = ({ imgSrc, size = 100 }: BlobProps) => {
   const rand = Math.floor(Math.random() * 7);
   return (
     <div
-      className={`relative w-[${size.toString()}px] bg-no-repeat bg-cover h-[${size.toString()}px] flex items-center justify-center`}
+      style={{ width: `${size}px`, height: `${size}px` }}
+      className={`relative bg-no-repeat bg-cover flex items-center justify-center`}
     >
       <img className="absolute w-full h-full" src={blobs[rand]} alt="Blob" />
       <img className="absolute w-2/3 rounded-full" src={imgSrc} alt="img" />

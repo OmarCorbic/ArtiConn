@@ -1,17 +1,21 @@
 import ProfilePhoto from "../user/ProfilePhoto";
-import { useDeleteAdMutation } from "./adsApiSlice";
+import { Ad, useDeleteAdMutation, useEditAdMutation } from "./adsApiSlice";
 import { selectCurrentUserId } from "../auth/authSlice";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Modal from "../../components/Modal";
+import toast from "react-hot-toast";
+import AdForm from "./AdForm";
 
-const Ad = ({ ad }: { ad: any }) => {
+const Ad = ({ ad }: { ad: Ad }) => {
   const [showAdOptions, setShowAdOptions] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const loggedInUserId = useSelector(selectCurrentUserId);
+  const [showEdit, setShowEdit] = useState(false);
   const [deleteAd] = useDeleteAdMutation();
+  const [editAd] = useEditAdMutation();
   const clockCharacter = "🕒";
+  const loggedInUserId = useSelector(selectCurrentUserId);
 
   useEffect(() => {
     const hideAdOptions = (e: any) => {
@@ -27,39 +31,61 @@ const Ad = ({ ad }: { ad: any }) => {
     };
   });
 
-  const handleDelete = async () => {
+  const toggleAdOptions = () => {
+    setShowAdOptions((prev) => !prev);
+  };
+
+  const handleFormSubmit = async (e: any, adData: any) => {
+    e.preventDefault();
     try {
-      await deleteAd({ adId: ad?.adId }).unwrap();
+      const response: any = await editAd({
+        adId: ad?.adId,
+        body: adData,
+      }).unwrap();
+      toast.success(
+        response?.data?.message || response?.message || "Ad deleted"
+      );
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleConfirm = () => {
-    setShowConfirm(true);
+  const handleCancelEdit = () => {
+    setShowEdit(false);
   };
 
-  const toggleAdOptions = () => {
-    setShowAdOptions((prev) => !prev);
+  const handleDelete = async () => {
+    try {
+      const response: any = await deleteAd({ adId: ad?.adId }).unwrap();
+      toast.success(
+        response?.data?.message || response?.message || "Ad deleted"
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const hideModal = (e: any) => {
     if (e.target.id === "modalBackground") {
       setShowConfirm(false);
+      setShowEdit(false);
     }
   };
 
   const calculateTime = (ad: any) => {
     const current = new Date();
-
     let minutes =
       (current.getTime() - new Date(ad?.createdAt).getTime()) / 1000 / 60;
 
     let timeAgo;
     if (minutes >= 60) {
       const hours = Math.floor(minutes / 60);
-      const leftoverMinutes = Math.floor(minutes - hours * 60);
-      timeAgo = `${hours} h ${leftoverMinutes} min ago`;
+      if (hours > 24) {
+        const days = Math.floor(hours / 24);
+        timeAgo = `${days} days ago`;
+      } else {
+        timeAgo = `${hours} hr ago`;
+      }
     } else if (minutes >= 1) {
       timeAgo = `${Math.floor(minutes)} min ago`;
     } else {
@@ -70,14 +96,14 @@ const Ad = ({ ad }: { ad: any }) => {
 
   return (
     <div
-      style={
-        loggedInUserId === ad.userId
-          ? { gridTemplateColumns: "1fr 1fr 20px" }
-          : {}
-      }
+      style={{
+        gridTemplateColumns:
+          loggedInUserId === ad.userId ? "1fr 1fr 20px" : "1fr 1fr",
+        gridTemplateRows: "1fr 80px 20px 1fr 1fr",
+      }}
       className={`grid ${
-        loggedInUserId === ad.userId ? "grid-cols-3 pl-4" : "grid-cols-2 px-4"
-      } relative grid-rows-5 items-center border border-slate-300 rounded-lg py-3 text-sm w-full`}
+        loggedInUserId === ad.userId ? " pl-4" : "px-4"
+      } relative bg-white items-center border border-slate-300 rounded-lg gap-1 py-3 text-sm w-full max-w-[400px]`}
     >
       {showConfirm && (
         <Modal hideModal={hideModal}>
@@ -92,16 +118,29 @@ const Ad = ({ ad }: { ad: any }) => {
             <div className="flex items-center justify-center gap-2">
               <button
                 onClick={handleDelete}
-                className="py-2 w-1/3 px-2 rounded-sm bg-slate-300"
+                className="py-2 px-2 rounded-sm bg-slate-300"
               >
                 Confirm
               </button>
               <button
                 onClick={() => setShowConfirm(false)}
-                className="py-2 w-1/3 px-2 rounded-sm bg-slate-300"
+                className="py-2 px-2 rounded-sm bg-slate-300"
               >
                 Cancel
               </button>
+            </div>
+          </div>
+        </Modal>
+      )}
+      {showEdit && (
+        <Modal hideModal={hideModal}>
+          <div className="flex flex-col gap-4">
+            <div>
+              <AdForm
+                initialValues={ad}
+                handleCancel={handleCancelEdit}
+                handleFormSubmit={handleFormSubmit}
+              />
             </div>
           </div>
         </Modal>
@@ -111,11 +150,11 @@ const Ad = ({ ad }: { ad: any }) => {
       </div>
       <Link
         className="overflow-hidden justify-self-end rounded-full w-[32px] h-[32px] border border-slate-300 flex items-center justify-center text-xl font-bold"
-        to={`/profile/${ad?.userId}`}
+        to={`/private/profile/${ad?.userId}`}
       >
         <ProfilePhoto userId={ad?.userId} />
       </Link>
-      <div className="col-span-2 text-xs text-slate-500 px-2">
+      <div className="col-span-2 overflow-auto h-full text-xs text-slate-500 px-2">
         <p>{ad?.description}</p>
       </div>
       <div className="col-span-2">
@@ -149,16 +188,20 @@ const Ad = ({ ad }: { ad: any }) => {
             <div
               id="options"
               className={`${
-                showAdOptions ? "w-1/3 " : "w-0"
-              } flex flex-col gap-2 text-slate-700 text-base items-center justify-center duration-300 overflow-hidden absolute top-0 right-[20px] h-full bg-slate-200`}
+                showAdOptions ? "w-1/3 border-l border-r" : "w-0"
+              } flex flex-col text-slate-700 text-base items-center justify-center duration-300 overflow-hidden absolute top-0 right-[20px] h-full bg-white `}
             >
-              <button id="options" className="bg-slate-300 w-full py-1">
+              <button
+                onClick={() => setShowEdit(true)}
+                id="options"
+                className="border-b border-t w-full py-1"
+              >
                 Edit ad
               </button>
               <button
                 id="options"
-                onClick={handleConfirm}
-                className="bg-slate-300 w-full py-1"
+                onClick={() => setShowConfirm(true)}
+                className="border-b w-full py-1"
               >
                 Delete ad
               </button>

@@ -1,38 +1,17 @@
 import UserInfo from "./UserInfo";
 import UserAds from "./UserAds";
-import { useNavigate, useParams } from "react-router-dom";
-import { useLogoutMutation } from "../auth/authApiSlice";
-import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 const UserProfileLayout = () => {
   const params = useParams();
-  const navigate = useNavigate();
-  const [logout, { isLoading }] = useLogoutMutation();
-
-  const handleLogOut = async () => {
-    try {
-      await logout({}).unwrap();
-      navigate("/");
-    } catch (error: any) {
-      toast.error(error?.data?.message || error?.message || error);
-      navigate("/");
-    }
-  };
-
+  const userId = Number(params.id);
   return (
-    <div className="py-2">
-      {/* <button
-        disabled={isLoading}
-        onClick={handleLogOut}
-        className="bg-red-400"
-      >
-        Log out
-      </button> */}
-      <div className="px-3">
-        <UserInfo userId={params.id} />
+    <div className="overflow-auto">
+      <div className="px-3 border-b py-5">
+        <UserInfo userId={userId} />
       </div>
-      <div className="px-1">
-        <UserAds userId={params.id} />
+      <div className="px-1 py-3">
+        <UserAds userId={userId} />
       </div>
     </div>
   );

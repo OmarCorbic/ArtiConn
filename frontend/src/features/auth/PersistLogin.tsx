@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, Navigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useRefreshTokenMutation } from "./authApiSlice";
 import usePersist from "../../hooks/usePersist";
@@ -43,25 +43,17 @@ const PersistLogin = () => {
 
   let content;
   if (!persist) {
-    // persist: no
-    console.log("no persist");
     content = <Outlet />;
   } else if (isError) {
-    //persist: yes, token: no
-    console.log("error");
-    content = (
-      <p className="errmsg">
-        {`${error?.data?.message} - `}
-        <Link to="/auth">Please login again</Link>.
-      </p>
-    );
+    console.log(error.status);
+    if (error.status === 401) {
+      content = <Navigate to="/auth" />;
+    } else {
+      content = <p className="errmsg">{`${error?.data?.message} - `}</p>;
+    }
   } else if (isSuccess && trueSuccess) {
-    //persist: yes, token: yes
-    console.log("success");
     content = <Outlet />;
   } else if (token && isUninitialized) {
-    //persist: yes, token: yes
-    console.log("token and uninit");
     console.log(isUninitialized);
     content = <Outlet />;
   }

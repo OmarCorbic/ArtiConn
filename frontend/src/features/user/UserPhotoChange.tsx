@@ -32,7 +32,6 @@ const UserPhotoChange = () => {
     e.preventDefault();
     const formData = new FormData();
     if (profilePhoto) {
-      console.log(profilePhoto?.photoAsFile);
       formData.append("profile-photo", profilePhoto?.photoAsFile);
 
       const loading = toast.loading("Updating profile photo...");

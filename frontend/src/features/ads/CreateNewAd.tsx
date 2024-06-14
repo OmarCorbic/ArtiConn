@@ -8,8 +8,7 @@ const CreateNewAd = () => {
   const [createAd] = useCreateAdMutation();
   const [showCreateForm, setShowCreateForm] = useState(false);
 
-  const handleFormSubmit = async (e: any, adData: any) => {
-    e.preventDefault();
+  const handleFormSubmit = async (adData: any) => {
     try {
       const response = await createAd({ body: adData }).unwrap();
       toast.success(response?.data?.message || response?.message || response);

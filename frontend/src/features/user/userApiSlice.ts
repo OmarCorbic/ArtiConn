@@ -23,6 +23,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         url: `/user/${data.userId}/profile-photo`,
         method: "GET",
       }),
+
       providesTags: [{ type: "User", id: "PHOTO" }],
     }),
 

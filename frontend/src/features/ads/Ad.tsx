@@ -1,5 +1,5 @@
 import ProfilePhoto from "../user/ProfilePhoto";
-import { Ad, useDeleteAdMutation, useEditAdMutation } from "./adsApiSlice";
+import { AdType, useDeleteAdMutation, useEditAdMutation } from "./adsApiSlice";
 import { selectCurrentUserId } from "../auth/authSlice";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -8,7 +8,7 @@ import Modal from "../../components/Modal";
 import toast from "react-hot-toast";
 import AdForm from "./AdForm";
 
-const Ad = ({ ad }: { ad: Ad }) => {
+const Ad = ({ ad }: { ad: AdType }) => {
   const [showAdOptions, setShowAdOptions] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -35,8 +35,7 @@ const Ad = ({ ad }: { ad: Ad }) => {
     setShowAdOptions((prev) => !prev);
   };
 
-  const handleFormSubmit = async (e: any, adData: any) => {
-    e.preventDefault();
+  const handleFormSubmit = async (adData: any) => {
     try {
       const response: any = await editAd({
         adId: ad?.adId,
@@ -103,7 +102,7 @@ const Ad = ({ ad }: { ad: Ad }) => {
       }}
       className={`grid ${
         loggedInUserId === ad.userId ? " pl-4" : "px-4"
-      } relative bg-white items-center border border-slate-300 rounded-lg gap-1 py-3 text-sm w-full max-w-[400px]`}
+      } relative bg-white items-center border border-slate-300 rounded-lg gap-1 py-3 text-sm w-full max-w-[400px] max-h-[250px]`}
     >
       {showConfirm && (
         <Modal hideModal={hideModal}>
@@ -146,7 +145,9 @@ const Ad = ({ ad }: { ad: Ad }) => {
         </Modal>
       )}
       <div className="font-bold">
-        <p>{ad?.title}</p>
+        <p>
+          {ad?.title} {ad?.adId}
+        </p>
       </div>
       <Link
         className="overflow-hidden justify-self-end rounded-full w-[32px] h-[32px] border border-slate-300 flex items-center justify-center text-xl font-bold"

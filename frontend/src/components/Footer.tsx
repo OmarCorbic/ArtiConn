@@ -6,7 +6,8 @@ const Footer = () => {
     <footer
       className={` text-white p-4 text-center ${
         location.pathname.startsWith("/private") ||
-        location.pathname.startsWith("/auth")
+        location.pathname.startsWith("/auth") ||
+        location.pathname.startsWith("/public-feed")
           ? "hidden"
           : "block"
       }`}

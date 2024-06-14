@@ -5,12 +5,10 @@ import Footer from "./Footer";
 
 const Layout = () => {
   return (
-    <div>
+    <div className="h-screen flex flex-col">
       <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
-      <div>
-        <Outlet />
-      </div>
+      <Outlet />
       <Footer />
     </div>
   );

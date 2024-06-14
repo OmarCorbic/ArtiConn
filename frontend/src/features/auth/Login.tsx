@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { setCredentials } from "./authSlice";
 import usePersist from "../../hooks/usePersist";
+import { validateEmail } from "../../utils/validation";
 
 const Login = () => {
   const initialState = {
@@ -23,13 +24,15 @@ const Login = () => {
     setLoginData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmitForm = async (e: any) => {
+  const handleFormSubmit = async (e: any) => {
     e.preventDefault();
-    const { email, password } = loginData;
-    if (!email || !/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/.test(email))
-      return toast.error("Invalid E-mail");
-    if (!password || password.length <= 8)
-      return toast.error("Password must be longer than 8 characters");
+    const { email } = loginData;
+
+    // validation
+    let errors = validateEmail(email);
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
 
     try {
       const response = await login({ ...loginData }).unwrap();
@@ -37,7 +40,7 @@ const Login = () => {
       if (accessToken) {
         dispatch(setCredentials({ accessToken }));
         toast.success(response?.data?.message || response.message);
-        navigate("/feed");
+        navigate("/private");
       }
     } catch (err: any) {
       toast.error(err.data?.message || err.message || err);
@@ -48,8 +51,8 @@ const Login = () => {
 
   return (
     <form
-      className="bg-white text-sm flex flex-col justify-around   min-h-[400px] rounded-t-2xl mt-auto pt-8 px-4 overflow-auto md:mt-0 md:rounded-tr-none md:w-1/2 md:py-0 md:px-10 md:rounded-t-none "
-      onSubmit={handleSubmitForm}
+      className="bg-white text-sm flex flex-col justify-center min-h-[400px] rounded-t-2xl mt-auto pt-8 px-4 overflow-auto md:mt-0 md:rounded-tr-none md:w-1/2 md:py-0 md:px-10 md:rounded-t-none "
+      onSubmit={handleFormSubmit}
     >
       <div className="flex flex-col gap-3">
         <div className="text-xl font-bold text-violet-600 text-center">
@@ -73,6 +76,7 @@ const Login = () => {
             Password <span className="text-red-400">*</span>
           </div>
           <input
+            autoComplete="true"
             className="w-full outline-none border border-slate-300 px-2 py-1 rounded-xl focus:border-violet-600"
             type="password"
             name="password"

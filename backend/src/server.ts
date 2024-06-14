@@ -12,7 +12,6 @@ import authRouter from "./routes/auth";
 import adsRouter from "./routes/ads";
 
 import errorHandler from "./middleware/error-handler";
-import authorizeUser from "./middleware/authorization";
 
 app.use(cors());
 app.use(cookieParser());

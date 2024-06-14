@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentUserId } from "../auth/authSlice";
 
 type Props = {
-  handleFormSubmit: (e: any, data: any) => void;
+  handleFormSubmit: (data: any) => void;
   handleCancel: () => void;
   initialValues?: any;
 };
@@ -29,8 +29,9 @@ const AdForm = ({ handleFormSubmit, handleCancel, initialValues }: Props) => {
   };
 
   const submit = (e: any) => {
-    handleFormSubmit(e, { ...adData });
-    handleCancel();
+    e.preventDefault();
+    handleFormSubmit({ ...adData });
+    // handleCancel();
   };
 
   return (

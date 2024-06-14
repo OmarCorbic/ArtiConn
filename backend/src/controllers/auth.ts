@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import { StatusCodes } from "http-status-codes";
 import nodemailer from "nodemailer";
 import redis from "../redis";
+import { generateRandomCode } from "../utils/generateRandomCode";
 
 export const register = async (req: Request, res: Response) => {
   const {
@@ -160,7 +161,7 @@ export const sendVerificationCode = async (req: Request, res: Response) => {
     throw new BadRequestError("E-mail is missing");
   }
 
-  const code = Math.floor(100000 + Math.random() * 900000);
+  const code = generateRandomCode();
 
   const transporter = nodemailer.createTransport(
     `smtps://${process.env.EMAIL_USER}:${process.env.EMAIL_KEY}@smtp.gmail.com`
@@ -188,6 +189,7 @@ export const sendVerificationCode = async (req: Request, res: Response) => {
     const result = await transporter.sendMail(mailOptions);
 
     console.log(JSON.stringify(result.envelope));
+
     // save user code
     await redis.set(email, code);
     // set delete timeout
@@ -216,7 +218,7 @@ export const verifyCode = async (req: Request, res: Response) => {
   }
 
   const correctCode = await redis.get(email);
-  if (!correctCode || correctCode !== code) {
+  if (!correctCode || correctCode != code) {
     throw new CustomAPIError("Invalid code");
   }
 

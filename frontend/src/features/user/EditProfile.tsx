@@ -83,9 +83,7 @@ const EditProfile = () => {
     e.preventDefault();
 
     // validate password
-    let errors = {};
-    errors = validatePassword(
-      errors,
+    let errors = validatePassword(
       editedPassword.newPass,
       editedPassword.repeatPass
     );

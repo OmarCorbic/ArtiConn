@@ -1,0 +1,120 @@
+Carpenter: Constructs, installs, and repairs structures and fixtures made of wood or other materials.
+Electrician: Installs, maintains, and repairs electrical systems, wiring, and equipment.
+Plumber: Installs and repairs piping systems, fixtures, and appliances related to water supply, drainage, and sewage.
+Welder: Joins metal parts together using various welding techniques.
+Painter: Applies paint, stain, and other finishes to surfaces to protect, decorate, or enhance them.
+Bricklayer: Constructs and repairs structures using bricks, blocks, and other types of masonry units.
+Roofer: Installs and repairs roofs on residential, commercial, and industrial buildings.
+HVAC Technician: Installs, maintains, and repairs heating, ventilation, and air conditioning systems.
+Mason: Builds structures using materials like stone, brick, or concrete.
+Landscaper: Designs, installs, and maintains outdoor landscapes, including gardens, lawns, and hardscapes.
+Glazier: Installs and repairs glass in windows, doors, and other structures.
+Tiler: Installs ceramic, stone, or other types of tile on surfaces like floors, walls, and countertops.
+Drywaller: Installs and finishes drywall panels to create interior walls and ceilings.
+Flooring Installer: Installs various types of flooring materials, such as hardwood, tile, carpet, and laminate.
+Cabinetmaker: Constructs and installs custom cabinets and other woodworking projects.
+Locksmith: Installs, repairs, and adjusts locks and security devices.
+Stonemason: Works with natural or artificial stone to build structures or create decorative features.
+Scaffolder: Erects and dismantles scaffolding to provide access to buildings and structures for construction or maintenance.
+Blacksmith: Forges and shapes metal objects by heating and hammering.
+Upholsterer: Repairs and restores upholstered furniture, including sofas, chairs, and cushions.
+Carpet Installer: Installs carpeting and other soft flooring materials in residential and commercial settings.
+Fence Installer: Constructs and installs fences for privacy, security, or decorative purposes.
+Solar Panel Installer: Installs photovoltaic solar panels to generate electricity from sunlight.
+Alarm Technician: Installs and maintains security alarm systems for residential and commercial properties.
+Pest Control Technician: Inspects, identifies, and treats pest infestations using various methods and chemicals.
+Plasterer: Applies plaster to interior walls and ceilings to create a smooth finish.
+Gardener: Designs, plants, and maintains gardens and landscapes to enhance outdoor spaces.
+Pool Technician: Maintains and repairs swimming pools and associated equipment, such as pumps and filters.
+Automotive Mechanic: Repairs and maintains automobiles, diagnosing and fixing mechanical issues.
+Boat Builder/Repairer: Constructs and repairs boats and marine vessels, including fiberglass repair and woodworking.
+Joiner: Constructs wooden items, such as doors, windows, and furniture, by joining pieces of wood together.
+Glazing Technician: Installs, repairs, and replaces glass in windows, doors, and other structures.
+Insulation Installer: Installs insulation materials to improve energy efficiency and comfort in buildings.
+Sheet Metal Worker: Fabricates and installs products made from sheet metal, such as ductwork and metal roofs.
+Sign Maker: Designs, manufactures, and installs signs for businesses, organizations, and events.
+Window Installer: Installs and replaces windows in residential and commercial buildings.
+Concrete Finisher: Applies finishes to concrete surfaces, such as smoothing, sealing, and coloring.
+Elevator Technician: Installs, maintains, and repairs elevators, escalators, and other vertical transportation systems.
+Fire Sprinkler Installer: Installs and maintains fire sprinkler systems in buildings to protect against fire damage.
+Flooring Refinisher: Restores and refinishes existing hardwood floors to improve their appearance and durability.
+Glassblower: Crafts glass objects and artwork by heating and shaping molten glass.
+Interior Decorator: Enhances the interior spaces of homes and businesses through furniture, accessories, and color schemes.
+Metal Fabricator: Constructs metal structures and components by cutting, bending, and welding metal pieces.
+Millwright: Installs, maintains, and repairs machinery and industrial equipment in factories and other settings.
+Pipefitter: Installs and maintains piping systems for various applications, including plumbing, heating, and cooling.
+Plasterer: Applies plaster or stucco to interior and exterior surfaces for decorative or protective purposes.
+Restoration Specialist: Repairs and restores historic buildings, artwork, or other objects to their original condition.
+Sawyer: Operates a sawmill to cut logs into lumber and other wood products.
+Shipwright: Constructs and repairs ships and boats, including wooden hulls, decks, and interiors.
+Sound Technician: Sets up and operates sound equipment for live events, recordings, and performances.
+Staircase Installer: Installs and constructs staircases for residential and commercial buildings.
+Steelworker: Fabricates and installs structural steel components for buildings and infrastructure projects.
+Stonemason: Constructs and repairs structures using natural stone, such as walls, arches, and monuments.
+Terrazzo Worker: Installs and finishes terrazzo flooring and surfaces made from marble or granite chips embedded in concrete.
+Timber Framer: Constructs timber frame structures using traditional joinery techniques.
+Window Dresser: Designs and installs window displays for retail stores and other businesses.
+Horticulturist: Cultivates and manages plants for ornamental, agricultural, or environmental purposes.
+Irrigation Technician: Installs and maintains irrigation systems to water plants and crops efficiently.
+Lighting Technician: Installs and maintains lighting systems for residential, commercial, and theatrical settings.
+Fire Protection Technician: Installs, inspects, and maintains fire protection systems, including fire alarms, extinguishers, and suppression systems.
+Brick Mason: Specializes in laying bricks and blocks to construct walls, chimneys, and other structures using mortar.
+Cabinet Installer: Installs pre-made or custom cabinets in kitchens, bathrooms, and other areas of homes or businesses.
+Deck Builder: Constructs outdoor decks and patios using wood, composite materials, or other decking options.
+Drainage Specialist: Designs and installs drainage systems to manage surface water and prevent flooding on properties.
+Fence Repairer: Repairs damaged or deteriorated fences by replacing boards, posts, or other components.
+Fire Alarm Technician: Installs, tests, and maintains fire alarm systems to detect and alert occupants of fire emergencies.
+Furniture Maker: Constructs custom furniture pieces such as tables, chairs, and cabinets using woodworking techniques.
+Garage Door Installer: Installs and repairs garage doors and openers for residential and commercial properties.
+Glass Installer: Installs glass in windows, doors, shower enclosures, and other architectural applications.
+Gutter Installer: Installs and repairs gutters and downspouts to channel rainwater away from buildings.
+Home Inspector: Conducts inspections of residential properties to assess their condition and identify potential issues.
+House Painter: Paints interior and exterior surfaces of houses to protect and enhance their appearance.
+Irrigation Specialist: Designs, installs, and maintains irrigation systems for landscapes, gardens, and agricultural fields.
+Kitchen Remodeler: Renovates and remodels kitchens by installing new cabinets, countertops, appliances, and fixtures.
+Lock Technician: Specializes in repairing, rekeying, and installing locks for residential and commercial properties.
+Metal Roofer: Installs metal roofing panels or shingles on residential and commercial buildings for durability and longevity.
+Paving Contractor: Constructs driveways, sidewalks, and parking lots by laying asphalt or concrete pavement.
+Playground Installer: Installs playground equipment, safety surfacing, and amenities for parks, schools, and childcare facilities.
+Roof Repair Specialist: Repairs leaks, damage, or deterioration on residential and commercial roofs to extend their lifespan.
+Tile Setter: Installs ceramic, porcelain, or natural stone tiles on floors, walls, and other surfaces.
+Tree Surgeon: Prunes, trims, and removes trees to maintain their health and safety in urban and natural environments.
+Waterproofing Contractor: Applies waterproofing materials to foundations, basements, and other below-grade structures.
+Welding Fabricator: Fabricates metal structures, components, and equipment through welding and metalworking processes.
+Window Repair Technician: Repairs or replaces broken or malfunctioning windows in residential and commercial buildings.
+Appliance Repair Technician: Repairs and maintains household appliances such as refrigerators, washers, dryers, and dishwashers.
+Asphalt Paver: Lays and compacts asphalt pavement for roads, driveways, and parking lots using specialized equipment.
+Awning Installer: Installs retractable or fixed awnings to provide shade and shelter for windows, doors, and outdoor spaces.
+Boiler Technician: Installs, maintains, and repairs boilers and heating systems for residential and commercial properties.
+Bricklayer Assistant: Assists bricklayers by mixing mortar, cutting bricks, and providing other support during construction projects.
+Chimney Sweep: Cleans and inspects chimneys to remove creosote buildup and ensure safe operation of fireplaces and heating appliances.
+Concrete Pump Operator: Operates concrete pumps to deliver and place concrete in hard-to-reach or elevated areas on construction sites.
+Door Repair Specialist: Repairs or replaces damaged or malfunctioning doors, hinges, locks, and hardware.
+Driveway Sealer: Applies sealant to asphalt or concrete driveways to protect against water damage, UV exposure, and wear.
+Dryer Vent Cleaner: Cleans and unclogs dryer vents to prevent fire hazards and improve dryer efficiency.
+Electrical Inspector: Inspects electrical systems and installations to ensure compliance with building codes and safety standards.
+Energy Auditor: Conducts assessments of residential and commercial properties to identify energy efficiency improvements and cost-saving measures.
+Excavation Contractor: Excavates and grades land for construction projects, utilities, foundations, and landscaping.
+Fence Painter: Applies paint or stain to wooden fences to enhance their appearance and protect against weathering and decay.
+Fireproofing Applicator: Applies fire-resistant coatings or materials to structural elements to improve fire safety.
+Flooring Estimator: Calculates material quantities and costs for flooring projects based on measurements and specifications.
+Foundation Repair Specialist: Repairs and stabilizes foundation problems such as settling, cracking, or sinking.
+Furniture Refinisher: Restores and refinishes antique or damaged furniture to preserve its beauty and functionality.
+Garage Organizer: Designs and installs storage solutions and organization systems for garage spaces.
+Glass Cutter: Cuts glass to size for windows, mirrors, tabletops, and other custom glass applications.
+Greenhouse Builder: Constructs and installs greenhouse structures for horticulture, agriculture, or botanical purposes.
+Home Automation Technician: Installs and configures smart home systems for security, lighting, climate control, and entertainment.
+Home Stager: Prepares homes for sale by arranging furniture, decor, and accessories to enhance their appeal to potential buyers.
+Industrial Painter: Applies protective coatings to industrial equipment, machinery, and structures to prevent corrosion and wear.
+Insulation Contractor: Installs thermal and acoustic insulation to improve energy efficiency and comfort in buildings.
+Kitchen Designer: Creates custom kitchen layouts and designs to maximize functionality, efficiency, and aesthetics.
+Landscape Architect: Designs outdoor spaces, parks, and landscapes for residential, commercial, and public projects.
+Lighting Designer: Plans and designs lighting schemes for interior and exterior spaces to achieve desired ambiance and functionality.
+Masonry Restorer: Repairs and restores historic or deteriorated masonry structures using traditional techniques and materials.
+Metal Refinisher: Cleans, refinishes, and restores metal surfaces on furniture, fixtures, and architectural elements.
+Mold Remediation Specialist: Removes and treats mold contamination in buildings to protect occupants' health and prevent property damage.
+Ornamental Ironworker: Fabricates and installs decorative metalwork such as railings, gates, and fences.
+Painting Contractor: Manages and oversees painting projects, including surface preparation, application, and finishing.
+Playground Inspector: Inspects playground equipment and safety surfacing for compliance with safety standards and regulations.
+Pool Builder: Constructs custom swimming pools, spas, and water features for residential and commercial properties.
+Property Manager: Oversees the operation, maintenance, and leasing of residential or commercial properties on behalf of owners or investors.

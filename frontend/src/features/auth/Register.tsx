@@ -6,19 +6,25 @@ import {
   useVerifyCodeMutation,
 } from "./authApiSlice";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  validateEmail,
+  validatePassword,
+  validatePhoneNumber,
+  validateUsername,
+} from "../../utils/validation";
+
+const initialState = {
+  username: "",
+  email: "",
+  verificationCode: "",
+  password: "",
+  repeatPassword: "",
+  biography: "",
+  phoneNumber: "",
+  skills: [],
+};
 
 const Register = () => {
-  const initialState = {
-    username: "",
-    email: "",
-    verificationCode: "",
-    password: "",
-    repeatPassword: "",
-    biography: "",
-    phoneNumber: "",
-    skills: [],
-  };
-
   const [sendVerificationCode] = useSendVerificationCodeMutation();
   const [verifyCode] = useVerifyCodeMutation();
   const [register] = useRegisterMutation();
@@ -27,18 +33,17 @@ const Register = () => {
   const [registerData, setRegisterData] = useState(initialState);
 
   const handleNextPage = () => {
-    const { username, password, repeatPassword } = registerData;
+    const { username, password, repeatPassword, phoneNumber } = registerData;
 
+    let errors = {};
     if (formPage === 3) {
-      if (!username) {
-        return toast.error("Username is required");
-      }
-      if (!password || password.length <= 8) {
-        return toast.error("Password must be longer than 8 characters");
-      }
-      if (password !== repeatPassword) {
-        return toast.error("Passwords do not match");
-      }
+      errors = validateUsername(username, errors);
+      errors = validatePassword(password, repeatPassword, errors);
+    } else if (formPage === 4) {
+      errors = validatePhoneNumber(phoneNumber, errors);
+    }
+    if (Object.keys(errors).length > 0) {
+      return;
     }
 
     setFormPage((prev) => {
@@ -55,7 +60,7 @@ const Register = () => {
     setRegisterData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmitForm = async (e: any) => {
+  const handleFormSubmit = async (e: any) => {
     e.preventDefault();
     try {
       const response = await register({ ...registerData }).unwrap();
@@ -74,17 +79,17 @@ const Register = () => {
         e.preventDefault();
         return;
       } else {
-        handleSubmitForm(e);
+        handleFormSubmit(e);
       }
     }
   };
 
   const handleSendCode = async () => {
     const { email } = registerData;
-    const emailRegExp = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
 
-    if (!email || !emailRegExp.test(email)) {
-      return toast.error("Invalid E-mail");
+    let errors = validateEmail(email);
+    if (Object.keys(errors).length > 0) {
+      return;
     }
 
     try {
@@ -129,7 +134,7 @@ const Register = () => {
   return (
     <form
       onKeyDown={handleKeyDown}
-      className="bg-white text-sm rounded-t-2xl mt-auto pt-8 px-4 overflow-auto md:mt-0 md:rounded-tr-none md:w-1/2 md:px-10 md:rounded-t-none "
+      className="bg-white flex flex-col justify-center text-sm rounded-t-2xl mt-auto pt-8 px-4 overflow-auto md:mt-0 md:rounded-tr-none md:w-1/2 md:px-10 md:rounded-t-none "
     >
       <div className="flex flex-col gap-3">
         <div className="text-xl font-bold text-violet-600 text-center">
@@ -293,7 +298,7 @@ const Register = () => {
             <button
               className="bg-violet-800 py-2 rounded-xl w-32 cursor-pointer text-white ml-auto"
               type="button"
-              onClick={handleSubmitForm}
+              onClick={handleFormSubmit}
             >
               Submit
             </button>

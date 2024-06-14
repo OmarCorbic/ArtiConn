@@ -6,33 +6,30 @@ import renovate3 from "../images/renovation3-nobg.png";
 import paint from "../images/paint-nobg.png";
 import electrician from "../images/electrician-nobg.png";
 import plumber from "../images/plumbing-nobg.png";
+import handshake from "../images/handshake.jpg";
 
 const images = [renovate1, renovate2, renovate3, paint, electrician, plumber];
 // const images = [renovate1];
 
 const Public = () => {
   return (
-    <div className="flex-col flex gap-5">
-      <div className="text-[50px] text-center">
-        <span className="text-white  font-bold">Arti</span>
-        <span className="text-cyan-200  ml-1  font-bold">Conn</span>
-        <p className="text-sm font-bold text-white">
-          Everything you need done.
-        </p>
-      </div>
-
-      <div className="flex flex-col-reverse lg:flex-row gap-5 items-center justify-center">
-        <div className="hidden relative border-dashed border-4 border-white rounded-full h-[600px] w-[600px] animate-spin-slow md:flex items-center justify-center">
+    <>
+      <div
+        style={{ backgroundImage: `url(${handshake})` }}
+        className="relative bg-cover bg-center flex flex-col-reverse lg:flex-row gap-5 items-center justify-center py-5"
+      >
+        <div className="absolute w-full h-full bg-black opacity-0 "></div>
+        <div className=" hidden relative border-dashed border-4 border-white rounded-full h-[400px] w-[400px] md:flex items-center justify-center">
           <Link
-            className="text-xl bg-lime-400 px-8 py-4 rounded-full text-white font-bold animate-bounce"
-            to="auth"
+            className="text-xl bg-yellow-500 py-2 px-3 rounded-full text-white font-bold"
+            to="/auth/register"
           >
             Join now
           </Link>
           {images.map((iSrc, index) => {
             const angle = (index / images.length) * 360; // Calculate angle for each element
-            const radius = 190; // Set the desired radius of the circle
-            const size = 200;
+            const radius = 130; // Set the desired radius of the circle
+            const size = 130;
 
             // Calculate position using trigonometry
             const xPos = radius * Math.cos((angle * Math.PI) / 180);
@@ -53,23 +50,26 @@ const Public = () => {
             );
           })}
         </div>
-        <div className="flex flex-col items-center w-full lg:w-1/2 text-center gap-5">
-          <h1 className="text-3xl text-white font-bold">
+        <div className="z-[1000] bg-black bg-opacity-40 rounded-full p-10 flex flex-col items-center w-full lg:w-1/2 text-center gap-5">
+          <h1 className="text-3xl text-yellow-400 font-bold">
             Welcome to ArtiConn!
           </h1>
-          <p className="text-cyan-100 lg:w-2/3 w-80">
+          <p className="text-white text-xs md:text-lg">
             A place where Craftsmanship Meets Opportunity - Your Bridge to
             Skilled Services and Seamless Connections!
           </p>
-          <Link
-            className="md:hidden text-xl bg-lime-400 px-8 py-4 rounded-full text-white font-bold animate-bounce"
-            to="auth"
-          >
-            Join now
-          </Link>
         </div>
       </div>
-    </div>
+      <section className="bg-gray-100 p-4">
+        <h2 className="text-xl font-semibold mb-4">Featured Jobs</h2>
+        {/* Display featured job listings */}
+      </section>
+
+      <section className="bg-gray-100 p-4">
+        <h2 className="text-xl font-semibold mb-4">Job Listings</h2>
+        {/* Display job listings */}
+      </section>
+    </>
   );
 };
 

@@ -3,7 +3,7 @@ import {
   createApi,
   BaseQueryApi,
 } from "@reduxjs/toolkit/query/react";
-import { setCredentials } from "../../features/auth/authSlice";
+import { logout, setCredentials } from "../../features/auth/authSlice";
 import {
   BaseQueryArg,
   BaseQueryResult,
@@ -31,7 +31,11 @@ const baseQueryWithReauth = async (
   // console.log(api) // signal, dispatch, getState()
   // console.log(extraOptions) //custom like {shout: true}
 
-  let result = await baseQuery(args, api, extraOptions);
+  let result: any = await baseQuery(args, api, extraOptions);
+
+  if (result?.error?.status === 500) {
+    return result.error;
+  }
 
   // If you want, handle other status codes, too
   if (result?.error?.status === 401) {
@@ -53,6 +57,7 @@ const baseQueryWithReauth = async (
     } else {
       if (refreshResult?.error?.status === 401) {
         refreshResult.error.data.message = "Your login has expired.";
+        api.dispatch(logout());
       }
       return refreshResult;
     }

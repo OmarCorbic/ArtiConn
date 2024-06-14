@@ -1,48 +1,24 @@
-import { UseQueryHookResult } from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import Ad from "./Ad";
-import { useGetAllAdsQuery } from "./adsApiSlice";
-import { QueryDefinition } from "@reduxjs/toolkit/query";
-import AdPlaceholder from "./AdPlaceholder";
 
-const AdsList = () => {
-  const {
-    data: ads,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  }: UseQueryHookResult<
-    QueryDefinition<any, any, any, any>
-  > = useGetAllAdsQuery({});
+import { MdPlaylistRemove } from "react-icons/md";
+import { AdType } from "./adsApiSlice";
 
-  let content;
-
-  if (isLoading) {
-    content = (
-      <div className="px-1 py-2 flex flex-col gap-2">
-        <AdPlaceholder />
-        <AdPlaceholder />
-        <AdPlaceholder />
-        <AdPlaceholder />
-      </div>
-    );
-  }
-
-  if (isError) {
-    content = <div>{error.data?.message}</div>;
-  }
-
-  if (isSuccess) {
-    content = (
-      <div className="px-1 py-2 flex flex-col gap-2">
-        {ads.map((ad: any) => {
-          return <Ad key={ad.adId} ad={ad} />;
-        })}
-      </div>
-    );
-  }
-
-  return content;
+const AdsList = ({ ads }: { ads: AdType[] }) => {
+  return (
+    <div className="justify-center px-1 py-2 flex flex-wrap gap-2">
+      {ads?.length < 1 ? (
+        <div className="flex items-center w-full py-3 px-10 justify-center border rounded-xl gap-2 shadow-md">
+          <MdPlaylistRemove size={30} /> <span> No ads to show.</span>
+        </div>
+      ) : (
+        <>
+          {ads?.map((ad: any) => {
+            return <Ad key={ad.adId} ad={ad} />;
+          })}
+        </>
+      )}
+    </div>
+  );
 };
 
 export default AdsList;

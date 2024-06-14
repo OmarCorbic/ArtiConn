@@ -5,10 +5,13 @@ import { StatusCodes } from "http-status-codes";
 import { AuthRequest } from "../types";
 
 export const getAllAds = async (req: AuthRequest, res: Response) => {
+  const { limit, offset } = req.query;
+
   const result: any = await query(
-    "SELECT *, DATE_FORMAT(date, '%Y-%m-%d') AS formatted_date FROM ads",
-    []
+    "SELECT *, DATE_FORMAT(date, '%Y-%m-%d') AS formatted_date FROM ads LIMIT ?, ?",
+    [offset, limit]
   );
+
   res.json(result);
 };
 
